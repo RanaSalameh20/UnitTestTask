@@ -17,9 +17,9 @@ namespace StringCalculator.Core.Processor
         [InlineData("1", 1)]
         [InlineData("1,2", 3)]
         [InlineData("1,2,5,2", 10)]
-        [InlineData("4,4,4,4,4,4",24)]
+        [InlineData("4,4,4,4,4,4", 24)]
         [InlineData("1\n2,3", 6)]
-        [InlineData("//;\n1;2" , 3)]
+        [InlineData("//;\n1;2", 3)]
 
         public void Add_ValidInputStringOfNumbers_ReturnsCorrectSum(String numbers, int expectedSum)
         {
@@ -39,7 +39,7 @@ namespace StringCalculator.Core.Processor
         [InlineData("\n,1\n2,\n")]
         [InlineData("\n,1\n\n2,\n")]
         [InlineData("\n,1\n\n2,\n\n")]
-        public void Add_InvalidInputStringOfNumbers_ThrowsFormatException(String numbers)
+        public void Add_InvalidInputStringOfNumbers_ThrowsFormatException(string numbers)
         {
 
             //Arange
@@ -51,7 +51,20 @@ namespace StringCalculator.Core.Processor
 
         }
 
+        [Theory]
+        [InlineData("1,4,-1" , "negatives not allowed: -1")]
+        public void Add_WithNegativeNumbers_ThrowsExceptionWithNegatives(string numbers , string expectedMessage)
+        {
 
+            //Arange
+            calculator = new StringCalculatorProcessor();
 
+            //Act 
+            var actualMessage = Assert.Throws<Exception>(() => calculator.Add(numbers));
+
+            //Assert
+            Assert.Equal(expectedMessage, actualMessage.Message);
+
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace StringCalculator.Core.Processor
 {
@@ -17,6 +18,8 @@ namespace StringCalculator.Core.Processor
 
             string[] numbersArray = numbers.Split(separator, '\n');
 
+            CheckForNegativeNumbers(numbersArray);
+
             var sum = 0;
             foreach (var numberString in numbersArray)
             {
@@ -24,6 +27,15 @@ namespace StringCalculator.Core.Processor
             }
             return sum;
 
+        }
+
+        private static void CheckForNegativeNumbers(string[] numbersArray)
+        {
+            var negativeNumbers = numbersArray.Where(c => int.Parse(c) < 0);
+            if (negativeNumbers.Any())
+            {
+                throw new Exception("negatives not allowed: " + string.Join(", ", negativeNumbers));
+            }
         }
 
         private static char FindSeparator(ref string numbers)
