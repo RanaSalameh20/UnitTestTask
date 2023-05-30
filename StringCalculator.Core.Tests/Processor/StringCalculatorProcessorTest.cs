@@ -19,6 +19,7 @@ namespace StringCalculator.Core.Processor
         [InlineData("1,2,5,2", 10)]
         [InlineData("4,4,4,4,4,4",24)]
         [InlineData("1\n2,3", 6)]
+        [InlineData("//;\n1;2" , 3)]
 
         public void Add_ValidInputStringOfNumbers_ReturnsCorrectSum(String numbers, int expectedSum)
         {
@@ -49,5 +50,8 @@ namespace StringCalculator.Core.Processor
             Assert.Throws<System.FormatException>(() => calculator.Add(numbers));
 
         }
+
+
+
     }
 }

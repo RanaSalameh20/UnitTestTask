@@ -13,16 +13,30 @@ namespace StringCalculator.Core.Processor
             if (numbers.Equals(""))
                 return 0;
 
-            string[] numbersArray = numbers.Split(',','\n');
+            var separator = FindSeparator(ref numbers);
 
+            string[] numbersArray = numbers.Split(separator, '\n');
 
-            int sum = 0;
+            var sum = 0;
             foreach (var numberString in numbersArray)
             {
                 sum += int.Parse(numberString);
             }
             return sum;
 
+        }
+
+        private static char FindSeparator(ref string numbers)
+        {
+            var separator = ',';
+
+            if (numbers.StartsWith("//"))
+            {
+                separator = numbers[2];
+                numbers = numbers.Substring(numbers.IndexOf('\n') + 1);
+            }
+
+            return separator;
         }
     }
 }
