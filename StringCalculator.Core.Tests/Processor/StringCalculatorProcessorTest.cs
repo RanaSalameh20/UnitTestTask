@@ -10,12 +10,14 @@ namespace StringCalculator.Core.Processor
 {
     public class StringCalculatorProcessorTest
     {
-        //private readonly calculator = new StringCalculatorProcessor();
 
         [Theory]
         [InlineData("", 0)]
         [InlineData("1", 1)]
         [InlineData("1,2", 3)]
+        [InlineData("1,2,5,2", 10)]
+        [InlineData("4,4,4,4,4,4",24)]
+
         public void Add_ValidInputStringOfNumbers_ReturnsCorrectSum(String numbers, int expectedSum)
         {
 
@@ -29,17 +31,5 @@ namespace StringCalculator.Core.Processor
             Assert.Equal(expectedSum, actualSum);
         }
 
-        [Theory]
-        [InlineData("1,2,3")]
-        [InlineData("1,2,3,4,5")]
-        public void Add_InvalidInputString_ThrowsArgumentException(string numbers)
-        {
-            //Arange
-            var calculator = new StringCalculatorProcessor();
-
-            //Assert
-            Assert.Throws<System.ArgumentException>(() => { calculator.Add(numbers); });
-
-        }
     }
 }

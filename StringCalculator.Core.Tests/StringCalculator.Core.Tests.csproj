@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StringCalculator\StringCalculator.csproj" />
+    <ProjectReference Include="..\StringCalculator.Core\StringCalculator.Core.csproj" />
   </ItemGroup>
 
 </Project>
