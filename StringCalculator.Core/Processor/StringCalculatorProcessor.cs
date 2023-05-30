@@ -13,7 +13,8 @@ namespace StringCalculator.Core.Processor
             if (numbers.Equals(""))
                 return 0;
 
-            string[] numbersArray = numbers.Split(',');
+            string[] numbersArray = numbers.Split(',','\n');
+
 
             int sum = 0;
             foreach (var numberString in numbersArray)
