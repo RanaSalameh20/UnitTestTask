@@ -23,7 +23,11 @@ namespace StringCalculator.Core.Processor
             var sum = 0;
             foreach (var numberString in numbersArray)
             {
-                sum += int.Parse(numberString);
+                var value = int.Parse(numberString);
+                if (value <= 1000)
+                {
+                    sum += value;
+                }
             }
             return sum;
 
@@ -34,7 +38,7 @@ namespace StringCalculator.Core.Processor
             var negativeNumbers = numbersArray.Where(c => int.Parse(c) < 0);
             if (negativeNumbers.Any())
             {
-                throw new Exception("negatives not allowed: " + string.Join(", ", negativeNumbers));
+                throw new Exception("negatives not allowed: " + string.Join(",", negativeNumbers));
             }
         }
 

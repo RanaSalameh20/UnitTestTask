@@ -20,8 +20,9 @@ namespace StringCalculator.Core.Processor
         [InlineData("4,4,4,4,4,4", 24)]
         [InlineData("1\n2,3", 6)]
         [InlineData("//;\n1;2", 3)]
+        [InlineData("1,20000,5,2", 8)]
 
-        public void Add_ValidInputStringOfNumbers_ReturnsCorrectSum(String numbers, int expectedSum)
+        public void Add_ValidInputStringOfNumbers_ReturnsCorrectSum(string numbers, int expectedSum)
         {
 
             //Arange
@@ -53,6 +54,8 @@ namespace StringCalculator.Core.Processor
 
         [Theory]
         [InlineData("1,4,-1" , "negatives not allowed: -1")]
+        [InlineData("1,4,-1,-5", "negatives not allowed: -1,-5")]
+
         public void Add_WithNegativeNumbers_ThrowsExceptionWithNegatives(string numbers , string expectedMessage)
         {
 
