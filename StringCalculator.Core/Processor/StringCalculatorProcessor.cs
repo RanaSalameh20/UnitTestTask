@@ -3,15 +3,15 @@ using System.Linq;
 
 namespace StringCalculator.Core.Processor
 {
-    public  class StringCalculatorProcessor
+    public class StringCalculatorProcessor
     {
         public StringCalculatorProcessor()
         {
         }
 
-        public  int Add(string numbers)
+        public int Add(string numbers)
         {
-            if (numbers.Equals(""))
+            if (string.IsNullOrEmpty(numbers))
                 return 0;
 
             var separator = FindSeparator(ref numbers);
@@ -20,20 +20,19 @@ namespace StringCalculator.Core.Processor
 
             CheckForNegativeNumbers(numbersArray);
 
-            var sum = 0;
-            foreach (var numberString in numbersArray)
-            {
-                var value = int.Parse(numberString);
-                if (value <= 1000)
+            var sum = numbersArray
+                .Select(numberString =>
                 {
-                    sum += value;
-                }
-            }
-            return sum;
+                    int.TryParse(numberString, out var value);
+                    return value;
+                })
+                .Where(value => value <= 1000)
+                .Sum();
 
+            return sum;
         }
 
-        private static void CheckForNegativeNumbers(string[] numbersArray)
+        private void CheckForNegativeNumbers(string[] numbersArray)
         {
             var negativeNumbers = numbersArray.Where(c => int.Parse(c) < 0);
             if (negativeNumbers.Any())
@@ -42,7 +41,7 @@ namespace StringCalculator.Core.Processor
             }
         }
 
-        private static char FindSeparator(ref string numbers)
+        private char FindSeparator(ref string numbers)
         {
             var separator = ',';
 

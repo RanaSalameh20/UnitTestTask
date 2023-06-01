@@ -12,6 +12,11 @@ namespace StringCalculator.Core.Processor
     {
         private StringCalculatorProcessor calculator;
 
+        public StringCalculatorProcessorTest()
+        {
+            calculator = new StringCalculatorProcessor();
+        }
+
         [Theory]
         [InlineData("", 0)]
         [InlineData("1", 1)]
@@ -24,9 +29,6 @@ namespace StringCalculator.Core.Processor
 
         public void Add_ValidInputStringOfNumbers_ReturnsCorrectSum(string numbers, int expectedSum)
         {
-
-            //Arange
-            calculator = new StringCalculatorProcessor();
 
             //Act
             var actualSum = calculator.Add(numbers);
@@ -43,10 +45,6 @@ namespace StringCalculator.Core.Processor
         public void Add_InvalidInputStringOfNumbers_ThrowsFormatException(string numbers)
         {
 
-            //Arange
-            calculator = new StringCalculatorProcessor();
-
-
             //Act & Assert
             Assert.Throws<System.FormatException>(() => calculator.Add(numbers));
 
@@ -58,9 +56,6 @@ namespace StringCalculator.Core.Processor
 
         public void Add_WithNegativeNumbers_ThrowsExceptionWithNegatives(string numbers , string expectedMessage)
         {
-
-            //Arange
-            calculator = new StringCalculatorProcessor();
 
             //Act 
             var actualMessage = Assert.Throws<Exception>(() => calculator.Add(numbers));
